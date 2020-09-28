@@ -7,7 +7,9 @@ function Note(props) {
     return ( 
         <Switch>
             <Route path={`${match.url}/new`}>
-                <NoteForm/>
+                <div className="Layout__main">
+                    <NoteForm/>
+                </div>
             </Route>
         </Switch>
      );

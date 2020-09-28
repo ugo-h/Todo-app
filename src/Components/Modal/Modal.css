@@ -15,8 +15,14 @@
     transform: translate(-50%, -50%);
     border: 1px solid #ccc;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
-    padding: 3rem;
+    padding: 4rem;
     display: flex;
     flex-flow: column;
     align-items: center;
+}
+
+.Modal__buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
 }

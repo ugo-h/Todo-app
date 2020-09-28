@@ -1,0 +1,14 @@
+.NoteForm{
+    /* border: 1px solid #ccc; */
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    /* padding: 3rem; */
+}
+.NoteForm__field{
+    display: flex;
+    flex-flow: column;
+    align-items: flex-start;
+}

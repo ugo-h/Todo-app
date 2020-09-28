@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import './NoteForm.css';
+// import Task from '../../Components/Tasks/Task/Task';
+import TasksList from '../../Components/Tasks/TasksList';
 
 class NoteForm extends Component {
     state = { 
-        title: ''
+        title: '',
+        tasks: [],
+        task: ''
      };
      
     inputChangeHandler(event) {
@@ -18,17 +23,34 @@ class NoteForm extends Component {
         if(!notes) {
             notes = [];
         }
-        const note = {title: this.state.title, id: Date.now().toString('16')};
+        const note = {title: this.state.title, id: Date.now().toString('16'), tasks: this.state.tasks};
         notes.push(note);
         localStorage.setItem('notes', JSON.stringify(notes));
         this.props.history.push('/')
     };
+    submitTaskHandler(ev) {
+        if(ev.key!=='Enter') return;
+        this.addTask();
+    }
+    addTask() {
+        const tasks = [...this.state.tasks];
+        tasks.push(this.state.task);
+        this.setState({ tasks, task: '' })
+    }
 
     render() { 
+        const tasks = this.state.tasks;
         return ( 
-            <form onSubmit={this.submitHandler.bind(this)}> 
-                <label>title</label>
-                <input name="title" value={this.state.title} onChange={this.inputChangeHandler.bind(this)}/>
+            <form className="NoteForm Utility__card" onSubmit={this.submitHandler.bind(this)}> 
+                <label className="NoteForm__field">
+                    Title
+                    <input name="title" value={this.state.title} onChange={this.inputChangeHandler.bind(this)}/>
+                </label>
+                <label className="NoteForm__field">
+                    Tasks
+                    {tasks.length > 0? <TasksList tasks={tasks}/>: null}
+                    <input onKeyDown={this.submitTaskHandler.bind(this)} name="task" form="none" value={this.state.task} onChange={this.inputChangeHandler.bind(this)}/>
+                </label>
                 <input type="submit" value="Create"/>
             </form>
          );

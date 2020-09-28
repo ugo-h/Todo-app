@@ -10,12 +10,12 @@ const modalConfirmDecline = ({ isShown, title, body, onConfirm, onDecline }) => 
        {isShown?
         <Aux>
         <div className="Backdrop"></div>
-        <div className="Modal">
+        <div className="Modal Utility__card">
             <h2 className="Modal__title">{title}</h2>
             <p className="Modal_body">{body}</p>
             <div className="Modal__buttons">
-                <button onClick={onConfirm}>Yes</button>
-                <button onClick={onDecline}>No</button>
+                <button className="Utility__btn--danger"onClick={onConfirm}>Delete</button>
+                <button  className="Utility__btn--neutral" onClick={onDecline}>Cancel</button>
             </div>
         </div>
         </Aux>

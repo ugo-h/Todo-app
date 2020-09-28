@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './NotesList.css';
 import Aux from '../../Components/Helper/Axillury';
 import ModalConfirmDecline  from '../../Components/Modal/Modal';
 import NotePreview from '../../Components/NotePreview/NotePreview';
@@ -18,8 +19,9 @@ class NotesList extends Component {
         this.setState({ notes });
     }
     async deleteHandler(id) {
-        this.setState({showModal: true})
-        // confirmModal(true, this.declineHandler, this.confirmHandler)
+        this.setState({showModal: true});
+        this.id = id;
+
     }
     declineHandler() {
         this.setState({showModal: false})
@@ -28,6 +30,8 @@ class NotesList extends Component {
     confirmHandler() {
         this.setState({showModal: false})
         console.log('deleted')
+        console.log(this.id)
+        this.deleteNote(this.id)
     }
     deleteNote(id) {
         const notes = this.state.notes;
@@ -40,7 +44,7 @@ class NotesList extends Component {
         return ( 
             <Aux>
                 {notes?
-                    <ul>
+                    <ul className="NotesList">
                         {notes.map((note, index) => <NotePreview content={note} deleteHandler={this.deleteHandler.bind(this, note.id)} key={index}/>)}
                     </ul>
                 :<h2>There are no notes yet...</h2>}

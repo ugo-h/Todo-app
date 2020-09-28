@@ -3,6 +3,7 @@ import './App.css';
 import {   BrowserRouter, Switch, Route } from 'react-router-dom';
 import Home from './routes/Home/Home';
 import Note from './routes/Note/Note';
+import Header from './Components/Header/Header';
 
 const portal = document.createElement('div');
 portal.id="portal"
@@ -12,6 +13,7 @@ function App() {
   return (
     <BrowserRouter>
     <div className="App">
+        <Header/>
         <Switch>
           <Route path="/note">
             <Note/>
