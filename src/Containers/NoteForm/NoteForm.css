@@ -8,7 +8,14 @@
     /* padding: 3rem; */
 }
 .NoteForm__field{
+    width: 80%;
     display: flex;
     flex-flow: column;
     align-items: flex-start;
+    margin: 0.5rem 0;
+}
+.NoteForm__field input{
+    padding: 0.5rem;
+    border-radius: 20px;
+    border: solid 1px #ccc;
 }

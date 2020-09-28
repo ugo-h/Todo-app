@@ -14,9 +14,14 @@
     min-width: 300px;
 }
 .Header__nav__el{
-    color: white;
+    padding: 1rem;
+    border-radius: 30px;
     text-decoration: none;
+    color: white;
+    background: none;
 }
 .Header__nav__el:hover{
-    text-decoration: underline;
+    color: black;
+    background-color: white;
+    /* text-decoration: underline; */
 }

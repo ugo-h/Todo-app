@@ -1,4 +1,5 @@
 .Task{
+    position: relative;
     display: flex;
     /* justify-content: space-between; */
     align-items: center;
@@ -8,4 +9,8 @@
 }
 .Task input{
     margin-right: 1rem;
+}
+.Task__delete-btn{
+    position: absolute;
+    right: 1rem;
 }
