@@ -1,25 +1,28 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {   BrowserRouter, Switch, Route } from 'react-router-dom';
+import Home from './routes/Home/Home';
+import Note from './routes/Note/Note';
+
+const portal = document.createElement('div');
+portal.id="portal"
+document.body.appendChild(portal)
 
 function App() {
   return (
+    <BrowserRouter>
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Switch>
+          <Route path="/note">
+            <Note/>
+          </Route>
+          
+          <Route path="/">
+             <Home/>
+          </Route>
+        </Switch>
     </div>
+    </BrowserRouter>
   );
 }
 
