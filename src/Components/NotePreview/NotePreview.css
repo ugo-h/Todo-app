@@ -2,8 +2,23 @@
     display: flex;
     flex-flow: column;
     align-items: flex-start;
-  
+    position: relative;
     /* border: 1px solid #ccc; */
     width: 100%;
     margin: 1rem 0;
+}
+
+.NotesList__element .Delete-btn{
+    background: none;
+    border: none;
+    position: absolute;
+    right: 1rem;
+}
+/* .NotesList__element__delete-btn img{
+    width: 2rem;
+} */
+.NotesList__element__open-btn{
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
 }

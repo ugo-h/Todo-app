@@ -18,10 +18,12 @@ body, html{
 }
 
 .Utility__btn, .Utility__btn--danger,
-.Utility__btn--success, .Utility__btn--neutral {
+.Utility__btn--success, .Utility__btn--neutral,
+.Utility__btn--alert {
   text-decoration: none;
+  border-radius: 5px;
   min-width: 4rem;
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   border: none;
   color: inherit;
   cursor: pointer;
@@ -43,6 +45,10 @@ body, html{
 .Utility__btn--success:hover{
   background: 	#6ab26c;
   color: white;
+}
+.Utility__btn--alert{
+  background: #ffa700;
+  color:white;
 }
 .Utility__btn--neutral{
   background: 	#808080;

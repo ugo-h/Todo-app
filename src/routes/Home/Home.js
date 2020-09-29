@@ -5,7 +5,7 @@ import NotesList from '../../Containers/NotesList/NotesList';
 const home = (pops) => {
     return(
         <div className="Layout__main"> 
-             <Link className="Utility__btn--success" to="/note/new">Create new note</Link>
+             <Link className="Utility__btn--success" to="/note/new">Create Note</Link>
              <NotesList/>
         </div>
     )

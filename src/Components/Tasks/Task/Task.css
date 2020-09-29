@@ -1,16 +1,24 @@
 .Task{
     position: relative;
     display: flex;
-    /* justify-content: space-between; */
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     margin:0.5rem 0;
     padding:0;
     width: 100%;
 }
+.Task__content {
+    width: 70%;
+    text-align: start;
+}
+.Task input:checked + .Task__content{
+   text-decoration: line-through;
+   /* color: red; */
+}
 .Task input{
     margin-right: 1rem;
 }
-.Task__delete-btn{
+.Task .Delete-btn, .Task .Delete-btn--sm{
     position: absolute;
     right: 1rem;
 }

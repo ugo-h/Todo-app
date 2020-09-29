@@ -19,6 +19,8 @@
     text-decoration: none;
     color: white;
     background: none;
+    font-size: 1.1rem;
+    font-weight: 500;
 }
 .Header__nav__el:hover{
     color: black;

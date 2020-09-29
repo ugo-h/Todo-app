@@ -1,10 +1,11 @@
 .NoteForm{
     /* border: 1px solid #ccc; */
-    width: 100%;
-    max-width: 400px;
+    width: 90%;
+    max-width: 500px;
     display: flex;
     flex-flow: column;
     align-items: center;
+    position: relative;
     /* padding: 3rem; */
 }
 .NoteForm__field{
@@ -14,8 +15,27 @@
     align-items: flex-start;
     margin: 0.5rem 0;
 }
-.NoteForm__field input{
+.NoteForm__field__input{
+    width: 100%;
     padding: 0.5rem;
     border-radius: 20px;
     border: solid 1px #ccc;
+}
+.NoteForm__title{
+    display: flex;
+}
+.NoteForm__title img{
+    cursor:pointer;
+    margin-left: 1rem;
+    width: 1rem;
+}
+.NoteForm__btn, .NoteForm__btn--left, .NoteForm__btn--right {
+    position: relative;
+    margin: 1rem 0;
+}
+.NoteForm__btn--left{
+    left: 0;
+}
+.NoteForm__btn--right{
+    align-self: flex-end;
 }

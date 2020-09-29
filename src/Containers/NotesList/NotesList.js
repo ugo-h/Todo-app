@@ -43,11 +43,11 @@ class NotesList extends Component {
         const notes = this.state.notes;
         return ( 
             <Aux>
-                {notes?
+                {notes.length > 0?
                     <ul className="NotesList">
                         {notes.map((note, index) => <NotePreview content={note} deleteHandler={this.deleteHandler.bind(this, note.id)} key={index}/>)}
                     </ul>
-                :<h2>There are no notes yet...</h2>}
+                :<h2 className="Utility__caption">There are no notes yet...</h2>}
                 <ModalConfirmDecline 
                     isShown={this.state.showModal}
                     title="Are you sure?"
