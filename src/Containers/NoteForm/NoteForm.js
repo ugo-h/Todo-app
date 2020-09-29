@@ -68,6 +68,14 @@ class NoteForm extends Component {
         this.setState({tasks: newTasks})
 
     }
+    checkHandler(id) {
+        const tasks = [...this.state.tasks];
+        const taskIndex = tasks.findIndex((task) => task.id === id)
+        tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked;
+        this.setState({ tasks })
+        console.log('checked')
+        console.log(tasks[taskIndex])
+    }
     render() { 
         const tasks = this.state.tasks;
         const allowEditing = this.state.allowEditing;
@@ -85,7 +93,7 @@ class NoteForm extends Component {
                     Tasks:
                     </label>
                     <div className="NoteForm__field">
-                    {tasks.length > 0? <TasksList tasks={tasks} deleteHandler={this.deleteHandler.bind(this)}/>: null}
+                    {tasks.length > 0? <TasksList tasks={tasks} deleteHandler={this.deleteHandler.bind(this)} checkHandler={this.checkHandler.bind(this)}/>: null}
                     {allowAddingTasks?
                     <input className="NoteForm__field__input" onBlur={() => this.setState({allowAddingTasks: false})}  onKeyDown={this.submitTaskHandler.bind(this)} name="task" form="none" value={this.state.task} onChange={this.inputChangeHandler.bind(this)}/>
                     : <button onClick={()=>this.setState({allowAddingTasks:true})} className="NoteForm__btn Utility__btn--alert">Add Task</button>}
