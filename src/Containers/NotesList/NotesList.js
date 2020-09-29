@@ -15,7 +15,8 @@ class NotesList extends Component {
     };
 
     getNotesAndSetToState() {
-        const notes = JSON.parse(localStorage.getItem('notes'));
+        let notes = JSON.parse(localStorage.getItem('notes'));
+        notes = notes? notes:[];
         this.setState({ notes });
     }
     async deleteHandler(id) {

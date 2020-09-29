@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import './NoteForm.css';
 import TasksList from '../../Components/Tasks/TasksList';
+import HistoryNode from './History';
 
 class NoteForm extends Component {
     state = { 
         title: '',
         tasks: [],
         task: '',
+        history: null,
         allowEditing: true,
         allowAddingTasks: true,
      };
@@ -59,7 +61,7 @@ class NoteForm extends Component {
     }
     addTask() {
         const tasks = [...this.state.tasks];
-        tasks.push({title: this.state.task, id: Date.now().toString(16)});
+        tasks.push({title: this.state.task, id: Date.now().toString(16), isChecked: false});
         this.setState({ tasks, task: '' })
     }
     deleteHandler(id) {
@@ -76,6 +78,15 @@ class NoteForm extends Component {
         console.log('checked')
         console.log(tasks[taskIndex])
     }
+    addToHistory() {
+        const currentState = {...this.state};
+        if(!this.state.history) {
+            this.setState({ history: new HistoryNode(currentState) })
+        } else {
+            const history = this.state.history.insert(currentState)
+            this.setState({ history })
+        }
+    }
     render() { 
         const tasks = this.state.tasks;
         const allowEditing = this.state.allowEditing;
@@ -86,7 +97,7 @@ class NoteForm extends Component {
                     Title:
                     {allowEditing?
                     <input className="NoteForm__field__input" form="none" onBlur={() => this.setState({allowEditing: false})} name="title" value={this.state.title} onChange={this.inputChangeHandler.bind(this)}/>
-                    :<h3 className="NoteForm__title">{this.state.title}<img src="https://www.svgrepo.com/show/61278/edit.svg"/></h3>
+                    :<h3 className="NoteForm__title">{this.state.title}<img alt="edit" src="https://www.svgrepo.com/show/61278/edit.svg"/></h3>
                     }
                 </label>
                 <label className="NoteForm__field">
