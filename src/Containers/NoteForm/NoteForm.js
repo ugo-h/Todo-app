@@ -18,10 +18,8 @@ class NoteForm extends Component {
      componentDidMount() {    
         const match = this.props.match;
         const id = match.params.id;
-        console.log(id)
         if(!id || id === 'new') return;
         const noteData = this.getDataFromLocalStorage(id);
-        console.log(noteData)
         this.id = id;
         this.setState({title: noteData.title, tasks: noteData.tasks, allowAddingTasks: false, allowEditing: false})
         this.addToHistory({tasks: noteData.tasks});
@@ -46,7 +44,6 @@ class NoteForm extends Component {
         }
         const note = {title: this.state.title, tasks: this.state.tasks};
         const existingNoteIndex = notes.findIndex(exNote => exNote.id === this.id);
-        console.log(existingNoteIndex)
         if(existingNoteIndex>=0) {
             note.id = this.id;
             notes[existingNoteIndex] = note;
@@ -78,18 +75,13 @@ class NoteForm extends Component {
         const taskIndex = tasks.findIndex((task) => task.id === id)
         tasks[taskIndex].isChecked = !tasks[taskIndex].isChecked;
         this.setState({ tasks })
-        console.log('checked')
-        console.log(tasks[taskIndex])
     }
     addToHistory(obj) {
         let {historyPointer} = this.state;
         const history = this.state.history.slice(0, historyPointer+1);
-        console.log(history)
         historyPointer++;
         history.push(obj)
         this.setState({ history, historyPointer})
-        console.log('added to history ', historyPointer)
-        console.log(history)
     }
     undoHandler() {
         const history = [...this.state.history];
@@ -98,11 +90,8 @@ class NoteForm extends Component {
             return;
         }
         historyPointer--;
-        console.log(history[historyPointer])
         const tasks = [...history[historyPointer].tasks];
         this.setState({ tasks, historyPointer });
-        console.log(`POINTER${historyPointer}, LAST:${history.length-1}`)
-        console.log(history)
     }
     redoHandler() {
         const history = [...this.state.history];
@@ -113,7 +102,6 @@ class NoteForm extends Component {
         historyPointer++;
         const tasks = [...history[historyPointer].tasks];
         this.setState({ tasks, historyPointer });
-        console.log(`POINTER${historyPointer}, LAST:${history.length-1}`)
     }
     render() { 
         const tasks = this.state.tasks;
