@@ -39,3 +39,17 @@
 .NoteForm__btn--right{
     align-self: flex-end;
 }
+
+.NoteForm__controls{
+    position: absolute;
+    width: 100px;
+    display: flex;
+    align-self: flex-end;
+    top:1rem    ;
+    right: 1rem;
+    /* justify-content: space-between; */
+}
+.NoteForm__controls .Button-icon{
+    /* position: absolute;
+    right: 0; */
+}

@@ -26,12 +26,9 @@ class NotesList extends Component {
     }
     declineHandler() {
         this.setState({showModal: false})
-        console.log('nothing')
     }
     confirmHandler() {
         this.setState({showModal: false})
-        console.log('deleted')
-        console.log(this.id)
         this.deleteNote(this.id)
     }
     deleteNote(id) {
@@ -51,11 +48,11 @@ class NotesList extends Component {
                 :<h2 className="Utility__caption">There are no notes yet...</h2>}
                 <ModalConfirmDecline 
                     isShown={this.state.showModal}
-                    title="Are you sure?"
-                    content=""
+                    title="Delete"
+                    
                     onConfirm={this.confirmHandler.bind(this)}
                     onDecline={this.declineHandler.bind(this)}
-                 />
+                >Do you want to delete this note?</ModalConfirmDecline>
             </Aux> 
         );
     }

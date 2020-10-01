@@ -27,11 +27,15 @@ body, html{
   border: none;
   color: inherit;
   cursor: pointer;
+  background:none;
+  color: black;
+  border: 1px solid #ccc;
 }
 
 .Utility__btn--danger{
   background:#a00100;
   color: white;
+  border: 1px solid #a00100;
 }
 
 .Utility__btn--danger:hover{
@@ -41,6 +45,7 @@ body, html{
 .Utility__btn--success{
   background: 	#09a34a;
   color: white;
+  border: 1px solid #09a34a;
 }
 .Utility__btn--success:hover{
   background: 	#6ab26c;
@@ -49,10 +54,12 @@ body, html{
 .Utility__btn--alert{
   background: #ffa700;
   color:white;
+  border: 1px solid #ffa700;
 }
 .Utility__btn--neutral{
   background: 	#808080;
   color: white;
+  border: 1px solid #808080;
 }
 .Utility__btn--neutral:hover{
   background:#707070;

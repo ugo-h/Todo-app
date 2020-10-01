@@ -7,6 +7,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 .Modal{
+    min-width: 300px;
     position: fixed;
     z-index: 1000;
     background: white;
@@ -15,14 +16,21 @@
     transform: translate(-50%, -50%);
     border: 1px solid #ccc;
     box-shadow: 0 0 7px rgba(0, 0, 0, 0.4);
-    padding: 4rem;
+    padding: 2rem;
     display: flex;
     flex-flow: column;
     align-items: center;
 }
-
+.Modal__title{
+    margin:0;
+    margin-bottom:0.5rem;
+}
+.Modal__content{
+    margin: 2rem 0;
+}
 .Modal__buttons{
+    margin-top: 1rem;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }

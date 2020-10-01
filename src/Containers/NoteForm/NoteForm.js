@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import './NoteForm.css';
 import TasksList from '../../Components/Tasks/TasksList';
-import HistoryNode from './History';
+import { Undo, Redo } from '../../Components/Delete-btn/Button';
 
 class NoteForm extends Component {
     state = { 
         title: '',
         tasks: [],
         task: '',
-        history: null,
+        history: [],
+        historyPointer: -1,
         allowEditing: true,
         allowAddingTasks: true,
      };
      
-     componentDidMount() {
+     componentDidMount() {    
         const match = this.props.match;
         const id = match.params.id;
         console.log(id)
@@ -23,6 +24,7 @@ class NoteForm extends Component {
         console.log(noteData)
         this.id = id;
         this.setState({title: noteData.title, tasks: noteData.tasks, allowAddingTasks: false, allowEditing: false})
+        this.addToHistory({tasks: noteData.tasks});
      }
 
      getDataFromLocalStorage(id) {
@@ -62,13 +64,14 @@ class NoteForm extends Component {
     addTask() {
         const tasks = [...this.state.tasks];
         tasks.push({title: this.state.task, id: Date.now().toString(16), isChecked: false});
-        this.setState({ tasks, task: '' })
+        this.setState({ tasks, task: '' });
+        this.addToHistory({ tasks });
     }
     deleteHandler(id) {
         const tasks = [...this.state.tasks];
         const newTasks = tasks.filter(task => task.id!==id);
-        this.setState({tasks: newTasks})
-
+        this.setState({ tasks: newTasks })
+        this.addToHistory({ tasks: newTasks });
     }
     checkHandler(id) {
         const tasks = [...this.state.tasks];
@@ -78,21 +81,53 @@ class NoteForm extends Component {
         console.log('checked')
         console.log(tasks[taskIndex])
     }
-    addToHistory() {
-        const currentState = {...this.state};
-        if(!this.state.history) {
-            this.setState({ history: new HistoryNode(currentState) })
-        } else {
-            const history = this.state.history.insert(currentState)
-            this.setState({ history })
+    addToHistory(obj) {
+        let {historyPointer} = this.state;
+        const history = this.state.history.slice(0, historyPointer+1);
+        console.log(history)
+        historyPointer++;
+        history.push(obj)
+        this.setState({ history, historyPointer})
+        console.log('added to history ', historyPointer)
+        console.log(history)
+    }
+    undoHandler() {
+        const history = [...this.state.history];
+        let {historyPointer} = this.state;
+        if(historyPointer - 1 < 0) {
+            return;
         }
+        historyPointer--;
+        console.log(history[historyPointer])
+        const tasks = [...history[historyPointer].tasks];
+        this.setState({ tasks, historyPointer });
+        console.log(`POINTER${historyPointer}, LAST:${history.length-1}`)
+        console.log(history)
+    }
+    redoHandler() {
+        const history = [...this.state.history];
+        let {historyPointer} = this.state;
+        if(historyPointer + 1 > history.length-1) {
+            return;
+        }
+        historyPointer++;
+        const tasks = [...history[historyPointer].tasks];
+        this.setState({ tasks, historyPointer });
+        console.log(`POINTER${historyPointer}, LAST:${history.length-1}`)
     }
     render() { 
         const tasks = this.state.tasks;
         const allowEditing = this.state.allowEditing;
         const allowAddingTasks = this.state.allowAddingTasks;
+        const allowUndo = this.state.historyPointer > 0;
+        const allowRedo = this.state.historyPointer < this.state.history.length -1;
         return ( 
             <form className="NoteForm Utility__card" onSubmit={this.submitHandler.bind(this)}> 
+                <div className="NoteForm__controls">
+                    {allowUndo? <Undo clickHandler={this.undoHandler.bind(this)}/>: <div style={{width: "2.3rem"}}></div> }
+                    {allowRedo? <Redo clickHandler={this.redoHandler.bind(this)}/>: ' ' }
+                </div>
+                
                 <label className="NoteForm__field" onClick={() => this.setState({allowEditing: true})}>
                     Title:
                     {allowEditing?

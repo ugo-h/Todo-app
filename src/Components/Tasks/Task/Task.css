@@ -18,7 +18,7 @@
 .Task input{
     margin-right: 1rem;
 }
-.Task .Delete-btn, .Task .Delete-btn--sm{
+.Task .Button-icon, .Task .Button-icon--sm{
     position: absolute;
     right: 1rem;
 }

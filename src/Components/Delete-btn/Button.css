@@ -1,0 +1,13 @@
+.Button-icon, .Button-icon--sm, .Button-icon--lg{
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.Button-icon img{
+    width: 2rem;
+}
+.Button-icon--sm img {
+    width: 1rem;
+}

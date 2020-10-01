@@ -4,7 +4,7 @@ import './Modal.css'
 import Aux from '../Helper/Axillury';
 
 
-const modalConfirmDecline = ({ isShown, title, body, onConfirm, onDecline }) => {
+const modalConfirmDecline = ({ isShown, title, children, onConfirm, onDecline }) => {
     return ReactDom.createPortal(
         <Aux>
        {isShown?
@@ -12,10 +12,10 @@ const modalConfirmDecline = ({ isShown, title, body, onConfirm, onDecline }) => 
         <div className="Backdrop"></div>
         <div className="Modal Utility__card">
             <h2 className="Modal__title">{title}</h2>
-            <p className="Modal_body">{body}</p>
+            <p className="Modal_body">{children}</p>
             <div className="Modal__buttons">
                 <button className="Utility__btn--danger"onClick={onConfirm}>Delete</button>
-                <button  className="Utility__btn--neutral" onClick={onDecline}>Cancel</button>
+                <button  className="Utility__btn" onClick={onDecline}>Cancel</button>
             </div>
         </div>
         </Aux>

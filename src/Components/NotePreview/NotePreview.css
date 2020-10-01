@@ -8,15 +8,13 @@
     margin-bottom: 2rem ;
 }
 
-.NotesList__element .Delete-btn{
+.NotesList__element .Button-icon{
     background: none;
     border: none;
     position: absolute;
     right: 1rem;
 }
-/* .NotesList__element__delete-btn img{
-    width: 2rem;
-} */
+
 .NotesList__element__open-btn{
     position: absolute;
     right: 1rem;

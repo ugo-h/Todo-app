@@ -6,7 +6,7 @@ const header = props => (
     <header className="Header">
         <nav className="Header__nav">
             <Link className="Header__nav__el" to="/">My Notes</Link>
-            <Link className="Header__nav__el" to="/note/new">New Note</Link>
+            <Link className="Header__nav__el" to="/note/new/clear">New Note</Link>
         </nav>
     </header>
 )
