@@ -1,8 +1,8 @@
 import React from 'react';
 import { Switch, Route, useRouteMatch, Redirect } from 'react-router-dom';
-import NoteForm from '../../Containers/NoteForm/NoteForm';
+import NoteForm from '../Containers/NoteForm/NoteForm';
 
-function Note(props) {
+function Note() {
     const match = useRouteMatch();
     return ( 
         <Switch>

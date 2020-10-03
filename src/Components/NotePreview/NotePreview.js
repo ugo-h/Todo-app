@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import TasksList from '../Tasks/TasksList';
-import { Delete } from '../Delete-btn/Button';
+import { Delete } from '../Button/Button';
 
 import './NotePreview.css';
 

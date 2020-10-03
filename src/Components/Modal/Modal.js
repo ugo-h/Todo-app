@@ -25,26 +25,4 @@ const modalConfirmDecline = ({ isShown, title, children, onConfirm, onDecline })
         document.getElementById('portal')
     )
 }
-// function confirmModal( show, onDecline, onConfirm) {
-//     const confirm = new Promise((res) => {
-//         const submit = () => res(true)
-//         const decline = () => res(false)
-//         ReactDomrender(
-//             <modalConfirmDecline
-//                 isShown={show}
-//                 title="Delete?"
-//                 content=""
-//                 onSubmit={submit}
-//                 onDecline={decline}
-//             />
-//         )
-//     }).then((res) => {
-//         if(res) {
-//             console.log('DELETING')
-//         }else{
-//             console.log('CANCEL')
-//         }
-//     }).finally(() => console.log('REMOVE MODAL'))
-//     return confirm;
-// }
 export default modalConfirmDecline;

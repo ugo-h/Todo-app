@@ -8,7 +8,7 @@ const tasksList = ({ tasks, disabled, deleteHandler, checkHandler }) => {
         <Aux>{
             tasks.length> 0?
             <ul className="TasksList">
-                {tasks.map((task, index) => <Task disabled={disabled} content={task} deleteHandler={deleteHandler} checkHandler={checkHandler} key={task.id}/>)}
+                {tasks.map(task => <Task disabled={disabled} content={task} deleteHandler={deleteHandler} checkHandler={checkHandler} key={task.id}/>)}
             </ul>
             :<h3 className="Utility__caption">No tasks yet</h3>    
         }</Aux>

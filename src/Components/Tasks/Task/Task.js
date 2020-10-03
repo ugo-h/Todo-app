@@ -1,6 +1,6 @@
 import React from 'react';
 import './Task.css';
-import { Delete } from '../../Delete-btn/Button';
+import { Delete } from '../../Button/Button';
 
 const task = ({ content, disabled, deleteHandler, checkHandler }) => {
     return(

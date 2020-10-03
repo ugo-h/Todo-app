@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import './NoteForm.css';
 import TasksList from '../../Components/Tasks/TasksList';
-import { Undo, Redo } from '../../Components/Delete-btn/Button';
+import { Undo, Redo } from '../../Components/Button/Button';
 
 class NoteForm extends Component {
     state = { 
@@ -19,10 +19,10 @@ class NoteForm extends Component {
         const match = this.props.match;
         const id = match.params.id;
         if(!id || id === 'new') return;
-        const noteData = this.getDataFromLocalStorage(id);
+        const note = this.getDataFromLocalStorage(id);
         this.id = id;
-        this.setState({title: noteData.title, tasks: noteData.tasks, allowAddingTasks: false, allowEditing: false})
-        this.addToHistory({tasks: noteData.tasks});
+        this.setState({title: note.title, tasks: note.tasks, allowAddingTasks: false, allowEditing: false})
+        this.addToHistory({tasks: note.tasks});
      }
 
      getDataFromLocalStorage(id) {
