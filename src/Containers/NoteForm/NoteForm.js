@@ -96,7 +96,7 @@ class NoteForm extends Component {
     redoHandler() {
         const history = [...this.state.history];
         let {historyPointer} = this.state;
-        if(historyPointer + 1 > history.length-1) {
+        if(historyPointer + 2 > history.length) {
             return;
         }
         historyPointer++;
