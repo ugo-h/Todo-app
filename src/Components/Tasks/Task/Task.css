@@ -11,6 +11,12 @@
     width: 70%;
     text-align: start;
 }
+.Task__buttons{
+    width: 3rem;
+    position: relative;
+    display: flex;
+}
+
 .Task input:checked + .Task__content{
    text-decoration: line-through;
    /* color: red; */
@@ -18,7 +24,7 @@
 .Task input{
     margin-right: 1rem;
 }
-.Task .Button-icon, .Task .Button-icon--sm{
+/* .Task .Button-icon, .Task .Button-icon--sm{
     position: absolute;
     right: 1rem;
-}
+} */

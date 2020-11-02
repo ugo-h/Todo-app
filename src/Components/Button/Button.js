@@ -15,7 +15,7 @@ class Button extends Component {
     }
     
     render() {
-        const {clickHandler} = this.props
+        let {clickHandler} = this.props
         return(
             <button className={`Button-icon${this.size}`} onClick={ clickHandler } form="none">
                 <img alt={this.type} src={this.url}/>
