@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import './NoteForm.css';
 import TasksList from '../../Components/Tasks/TasksList';
 import { Undo, Redo } from '../../Components/Button/Button';
+import TaskContext from '../../Context/TaskContext';
 
 class NoteForm extends Component {
     state = { 
@@ -13,7 +14,7 @@ class NoteForm extends Component {
         historyPointer: -1,
         allowEditing: true,
         allowAddingTasks: true,
-        currentEditableTaskIndex: -1,
+        currentEditableTaskId: 0,
         currentEditableTask: ''
      };
      
@@ -37,6 +38,27 @@ class NoteForm extends Component {
         const name = input.name;
         this.setState({[name]: input.value})
     };
+    setCurrentEditableTask(event) {
+        const { value } = event.target;
+        this.setState({ currentEditableTask: value })
+    }
+
+    updateTasks() {
+        const editableId = this.state.currentEditableTaskId;
+        const editedTask = this.state.currentEditableTask;
+        const tasks = [...this.state.tasks];
+        tasks.forEach((task, index) => {
+            if(task.id === editableId) {
+                tasks[index] = {
+                    title: editedTask,
+                    id: editableId,
+                    isChecked: false
+                };
+            }
+        })
+        this.addToHistory({ tasks });
+        this.setState({ tasks, currentEditableTask:'', currentEditableTaskId: 0 })
+    }
 
     submitHandler(event) {
         event.preventDefault();
@@ -73,10 +95,11 @@ class NoteForm extends Component {
         this.addToHistory({ tasks: newTasks });
     }
 
-    editTaskHandler(index) {
-        let { currentEditableTaskIndex } = this.state;
-        currentEditableTaskIndex = index;
-        this.setState({ currentEditableTaskIndex })
+    editTaskHandler(id, value) {
+        let { currentEditableTaskId, currentEditableTask } = this.state;
+        currentEditableTaskId = id;
+        currentEditableTask = value;
+        this.setState({ currentEditableTaskId, currentEditableTask });
     }
 
     checkHandler(id) {
@@ -136,7 +159,15 @@ class NoteForm extends Component {
                     Tasks:
                     </label>
                     <div className="NoteForm__field">
-                    {tasks.length > 0? <TasksList tasks={tasks} deleteHandler={this.deleteHandler.bind(this)} checkHandler={this.checkHandler.bind(this)} editHandler={this.editTaskHandler.bind(this)}/>: null}
+                        <TaskContext.Provider 
+                        value={{
+                            taskId:this.state.currentEditableTaskId, 
+                            taskValue: this.state.currentEditableTask, 
+                            inputHandler: this.setCurrentEditableTask.bind(this),
+                            updateTasksHandler: this.updateTasks.bind(this)
+                        }}>
+                             {tasks.length > 0? <TasksList tasks={tasks} deleteHandler={this.deleteHandler.bind(this)} checkHandler={this.checkHandler.bind(this)} editHandler={this.editTaskHandler.bind(this)}/>: null}
+                        </TaskContext.Provider>
                     {allowAddingTasks?
                     <input className="NoteForm__field__input" onBlur={() => this.setState({allowAddingTasks: false})}  onKeyDown={this.submitTaskHandler.bind(this)} name="task" form="none" value={this.state.task} onChange={this.inputChangeHandler.bind(this)}/>
                     : <button onClick={()=>this.setState({allowAddingTasks:true})} className="NoteForm__btn Utility__btn--alert">Add Task</button>}
