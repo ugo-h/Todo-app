@@ -1,6 +1,6 @@
 import React from 'react';
 import './Task.css';
-import { Delete, Edit } from '../../Button/Button';
+import { Delete, Edit, CheckMark } from '../../Button/Button';
 import withContext from '../../../Context/taskContextHoc';
 
 const task = ({ content, disabled, deleteHandler, editHandler, checkHandler, context }) => {
@@ -23,7 +23,7 @@ const task = ({ content, disabled, deleteHandler, editHandler, checkHandler, con
             {isEditable?<input className="Task__input" onKeyDown={submitTaskOnEnterHandler} autoFocus={true} name="currentEditableTask" onBlur={updateTasksHandler} onChange={inputHandler} value={taskValue}/>:<label htmlFor={content.id} className="Task__content">{content.title}</label>}
             {disabled?'':   
             <div className="Task__buttons">
-                <Edit size="small" clickHandler={editHandler}/>
+                {isEditable?<CheckMark size="small" clickHandler={() => updateTasksHandler()}/>:<Edit size="small" clickHandler={editHandler}/>}
                 <Delete size="small" clickHandler={() => deleteHandler(content.id)}/>
             </div>}
         </li>

@@ -47,4 +47,11 @@ export class Redo extends Button {
         this.url ="https://www.svgrepo.com/show/278479/redo.svg"
     }
 }
+export class CheckMark extends Button {
+    constructor(props) {
+        super(props);
+        this.type="checkmark";
+        this.url = "https://www.svgrepo.com/show/225864/check-success.svg";
+    }
+}
 
