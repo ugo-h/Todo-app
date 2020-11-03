@@ -10,18 +10,25 @@
 .Task__content {
     width: 70%;
     text-align: start;
+    
+    border: 1px solid transparent;
 }
 .Task__buttons{
     width: 3rem;
     position: relative;
     display: flex;
 }
-
-.Task input:checked + .Task__content{
+.Task__input {
+    padding: 0.2rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 70%;
+}
+.Task__checkbox:checked + .Task__content{
    text-decoration: line-through;
    /* color: red; */
 }
-.Task input{
+.Task__checkbox{
     margin-right: 1rem;
 }
 /* .Task .Button-icon, .Task .Button-icon--sm{

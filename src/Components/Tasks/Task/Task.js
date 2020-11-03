@@ -11,11 +11,16 @@ const task = ({ content, disabled, deleteHandler, editHandler, checkHandler, con
         inputHandler = context.inputHandler;
         updateTasksHandler = context.updateTasksHandler;
         isEditable = taskId === content.id;
-    }
+    };
+
+    function submitTaskOnEnterHandler(ev) {
+        if(ev.key !== 'Enter') return;
+        updateTasksHandler();
+    };
     return(
         <li className="Task">
-            <input checked={content.isChecked} value={content.isChecked} onChange={() => checkHandler(content.id)} id={content.id} disabled={disabled} type="checkbox" from="none"/>
-            {isEditable?<input autoFocus={true} name="currentEditableTask" onBlur={updateTasksHandler} onChange={inputHandler} value={taskValue}/>:<label htmlFor={content.id} className="Task__content">{content.title}</label>}
+            <input className="Task__checkbox" checked={content.isChecked} value={content.isChecked} onChange={() => checkHandler(content.id)} id={content.id} disabled={disabled} type="checkbox" from="none"/>
+            {isEditable?<input className="Task__input" onKeyDown={submitTaskOnEnterHandler} autoFocus={true} name="currentEditableTask" onBlur={updateTasksHandler} onChange={inputHandler} value={taskValue}/>:<label htmlFor={content.id} className="Task__content">{content.title}</label>}
             {disabled?'':   
             <div className="Task__buttons">
                 <Edit size="small" clickHandler={editHandler}/>
