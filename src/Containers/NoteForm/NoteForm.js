@@ -143,6 +143,10 @@ class NoteForm extends Component {
         const tasks = [...history[historyPointer].tasks];
         this.setState({ tasks, historyPointer });
     }
+    enterKeyPressOnTitle(ev) {
+        if(ev.key !== 'Enter') return;
+        this.setState({allowEditing: false})
+    }
     render() { 
         const tasks = this.state.tasks;
         const allowEditing = this.state.allowEditing;
@@ -159,7 +163,14 @@ class NoteForm extends Component {
                 <label className="NoteForm__field" onClick={() => this.setState({allowEditing: true})}>
                     Title:
                     {allowEditing?
-                    <input autoFocus={allowEditing} className="NoteForm__field__input" form="none" onBlur={() => this.setState({allowEditing: false})} name="title" value={this.state.title} onChange={this.inputChangeHandler.bind(this)}/>
+                    <input autoFocus={allowEditing} 
+                        className="NoteForm__field__input"
+                        form="none" onBlur={() => this.setState({allowEditing: false})} 
+                        name="title"
+                        value={this.state.title} 
+                        onChange={this.inputChangeHandler.bind(this)} 
+                        onKeyDown={this.enterKeyPressOnTitle.bind(this)}
+                    />
                     :<h3 className="NoteForm__title">{this.state.title}<img alt="edit" src="https://www.svgrepo.com/show/61278/edit.svg"/></h3>
                     }
                 </label>
@@ -177,7 +188,16 @@ class NoteForm extends Component {
                              {tasks.length > 0? <TasksList tasks={tasks} deleteHandler={this.deleteHandler.bind(this)} checkHandler={this.checkHandler.bind(this)} editHandler={this.editTaskHandler.bind(this)}/>: null}
                         </TaskContext.Provider>
                     {allowAddingTasks?
-                    <input autoFocus={!allowEditing} className="NoteForm__field__input" onBlur={() => this.setState({allowAddingTasks: false})}  onKeyDown={this.submitTaskHandler.bind(this)} name="task" form="none" value={this.state.task} onChange={this.inputChangeHandler.bind(this)}/>
+                    <input 
+                        autoFocus={!allowEditing} 
+                        className="NoteForm__field__input" 
+                        onBlur={() => this.setState({allowAddingTasks: false})}  
+                        onKeyDown={this.submitTaskHandler.bind(this)} 
+                        name="task" 
+                        form="none" 
+                        value={this.state.task} 
+                        onChange={this.inputChangeHandler.bind(this)}
+                    />
                     : <button onClick={()=>this.setState({allowAddingTasks:true})} className="NoteForm__btn Utility__btn--alert">Add Task</button>}
                     </div>
                 <input className="NoteForm__btn--right Utility__btn--success" type="submit" value="Save Changes"/>
